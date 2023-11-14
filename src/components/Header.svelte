@@ -1,7 +1,6 @@
 <script>
     import "../app.css";
 	import { isLoggedIn } from "../utils/auth";
-    function headerLogIn(){}
   </script>
 
 

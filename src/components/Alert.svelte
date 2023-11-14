@@ -1,5 +1,5 @@
 <script>
-  import { alerts } from "/utils/alerts";
+  import { alerts } from "../utils/alerts/alert.js";
   import { afterNavigate } from "$app/navigation"
 
   let alertType = null

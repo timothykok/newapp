@@ -3,6 +3,7 @@ import {writable} from 'svelte/store';
 export const isLoggedIn = writable(false);
 
 
+
 const emptyAuth = {
   "token": "",
   "userId": ""
@@ -54,6 +55,7 @@ export async function isValidToken() {
         "token": res.token,
         "userId": res.record.id
       }));
+      isLoggedIn.set(true);
 
       return true
     }
