@@ -4,7 +4,7 @@
     export let data;
 </script>
 
-<div class="mt-10">
+<div class="mt-10 pr-16 pl-16 pb-16">
     <div class="flex">
         <div class="flex-1">
             <h1 class="text-3xl font-extrabold">{data.job.title}</h1>
@@ -21,11 +21,12 @@
             <SvelteMarkdown source={data.job.requirements} />
             <div class="mt-6" />
             <h2 class="text-xl font-thin">How to Apply?</h2>
-            <p>{data.job.applicationInstructions}</p>
+            <SvelteMarkdown source={data.job.applicationInstructions} />
+        
         </div>
         <div class="basis-1/3 ml-4">
             <h2 class="text-xl font-thin">Location</h2>
-            <p>{data.job.location}</p>
+            <SvelteMarkdown source={data.job.location} />
             <div class="mt-6" />
             <h2 class="text-xl font-thin">Salary Range</h2>
             <p>

@@ -1,13 +1,13 @@
 <script>
     import "../app.css";
-	import { isLoggedIn } from "../utils/auth";
+	  import { isLoggedIn } from "../utils/auth";
+    import Header from '../components/Header.svelte'
+    import { Alert } from "../components/Alert.svelte";
 
-    console.log($isLoggedIn)
   </script>
 
 
-  <!-- <button bind:class="btn">Log out</button> -->
   
 
-  <slot />
-
+<Header />
+<slot />
