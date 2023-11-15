@@ -8,6 +8,6 @@
 
   
 
-<Header />
+<Header/>
 <Alert/>
 <slot />

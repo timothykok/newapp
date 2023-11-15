@@ -39,7 +39,6 @@
           let jobId = res.id
           console.log(jobId)
           goto(`/jobs/${jobId}`);
-
         } 
     }
   </script>
