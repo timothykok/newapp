@@ -2,9 +2,44 @@
     import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
     import { goto } from '$app/navigation';
     import { getUserId } from '../../../utils/auth.js';
-    let formErrors = {};
+    export let data;
+    // import { page } from '$app/stores';
+    // import { Pagination } from 'flowbite-svelte';
+    let formErrors = {}; 
 
     
+    // $: activeUrl = $page.url.searchParams.get('page');
+    // let pages = [
+    //   { name: 1, href: '/components/pagination?page=1' },
+    //   { name: 2, href: '/components/pagination?page=2' },
+    //   { name: 3, href: '/components/pagination?page=3' },
+    //   { name: 4, href: '/components/pagination?page=4' },
+    //   { name: 5, href: '/components/pagination?page=5' }
+    // ];
+
+    // $: {
+    //   pages.forEach((page) => {
+    //     let splitUrl = page.href.split('?');
+    //     let queryString = splitUrl.slice(1).join('?');
+    //     const hrefParams = new URLSearchParams(queryString);
+    //     let hrefValue = hrefParams.get('page');
+    //     if (hrefValue === activeUrl) {
+    //       page.active = true;
+
+    //     } else {
+    //       page.active = false;
+    //     }
+    //   });
+    //   pages = pages;
+    // }
+
+    // const previous = () => {
+    //   alert('Previous btn clicked. Make a call to your server to fetch data.');
+    // };
+    // const next = () => {
+    //   alert('Next btn clicked. Make a call to your server to fetch data.');
+    // };
+  
 
     async function createJob(evt) {
       evt.preventDefault()
@@ -99,7 +134,7 @@
               <input type="text" name="employer" placeholder="e.g. Facebook" class="input input-bordered w-full" required />
               {#if 'employer' in formErrors}
               <label class="text" for="employer">
-                  <span class="label-text-alt text-red-500">{formErrors['employer'].message}</span>
+                  <span class="label-text-alt text-red-500">{formErrors['testing'].message}</span>
               </label>
               {/if}
             </div>
@@ -115,12 +150,13 @@
               </label>
               {/if}
             </div>
+          
 
             <div class="form-control w-full">
               <label class="text" for="description">
                   <span class="label-text">Description</span>
               </label>
-              <input type="text" name="description" class="input input-bordered w-full h-60 align-text-top" required />
+              <input type="text" name="description" class="input input-bordered w-full h-60 align-text-top" maxlength="120" required />
               {#if 'description' in formErrors}
               <label class="text" for="description">
                   <span class="label-text-alt text-red-500">{formErrors['Description'].message}</span>
@@ -132,7 +168,7 @@
               <label class="text" for="requirements">
                   <span class="label-text">Requirements</span>
               </label>
-              <input type="text" name="requirements"  class="input input-bordered w-full h-40 align-text-top" required />
+              <input type="text" name="requirements"  class="input input-bordered w-full h-40 align-text-top" maxlength="120" required />
               {#if 'requirements' in formErrors}
               <label class="text" for="requirements">
                   <span class="label-text-alt text-red-500">{formErrors['requirements'].message}</span>
@@ -144,7 +180,7 @@
               <label class="text" for="applicationInstructions">
                   <span class="label-text">Application Instructions</span>
               </label>
-              <input type="text" name="applicationInstructions" class="input input-bordered w-full h-20 align-text-top" required />
+              <input type="text" name="applicationInstructions" class="input input-bordered w-full h-20 align-text-top" maxlength="120" required />
               {#if 'applicationInstructions' in formErrors}
               <label class="text" for=" applicationInstructions">
                   <span class="label-text-alt text-red-500">{formErrors['applicationInstructions'].message}</span>
@@ -161,4 +197,6 @@
             </div>
         </form>
     </div>
+    <!-- <Pagination {pages} on:previous={previous} on:next={next} />
+    <Pagination {pages} large on:previous={previous} on:next={next} /> -->
 </div>

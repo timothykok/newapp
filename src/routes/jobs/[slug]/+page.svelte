@@ -1,7 +1,14 @@
 <script>
     import SvelteMarkdown from 'svelte-markdown';
     import humanize from 'humanize-plus';
+    import { getUserId } from '../../../utils/auth.js';
     export let data;
+   
+    
+
+    
+
+
 </script>
 
 <div class="mt-10 pr-16 pl-16 pb-16">
@@ -36,4 +43,12 @@
             </p>
         </div>
     </div>
+    <div class="pt-10 position-relative left-0"> 
+            {#if data.job.user == getUserId()}
+            <a href = "/jobs/{data.job.id}/update" class="text-white bg-gray-700 hover:bg-white hover:text-black focus:ring-4 focus:ring-transparent-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-transparent-600 dark:hover:bg-transparent-700 focus:outline-none dark:focus:ring-transparent-800">Edit</a>
+            {/if}
+    </div>
+       
+        
 </div>
+

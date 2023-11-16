@@ -1,14 +1,16 @@
 <script>
     import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
     import { goto } from '$app/navigation';
+    import { getTokenFromLocalStorage, getUserId, authenticateUser} from '../../../../utils/auth.js';
+
+
     export let data;
-    
     let formErrors = {};
-
+    console.log(data)
+    console.log(data.job);
     
-    
 
-    async function updateJob(evt) {
+    export async function updateJob(evt) {
       evt.preventDefault()
 
       const userData = {
@@ -23,11 +25,12 @@
         user: getUserId()
       };
       
-      const resp = await fetch(PUBLIC_BACKEND_BASE_URL + `/api/collections/jobs/records/${id}`, {
+      const resp = await fetch(PUBLIC_BACKEND_BASE_URL + `/api/collections/jobs/records/${data.job.id}`, {
         method: 'PATCH',
         mode: 'cors',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: getTokenFromLocalStorage()
         },
         body: JSON.stringify(userData)
       });
@@ -56,7 +59,7 @@
               <label class="label" for="title">
                   <span class="label-text">Job Title</span>
               </label>
-              <input type="text" name="jobtitle" placeholder = {data.job.title} class="input input-bordered w-full" required />
+              <input type="text" name="jobtitle" value = {data.job.title} class="input input-bordered w-full" required />
               {#if 'title' in formErrors}
               <label class="label" for="title">
                   <span class="label-text-alt text-red-500">{formErrors['jobtitle'].message}</span>
@@ -68,7 +71,7 @@
             <label class="label" for="title">
                 <span class="label-text">Min Compensation Range</span>
             </label>
-            <input type="number" name="minAnnualCompensation" placeholder="3000" class="input input-bordered w-full" required />
+            <input type="number" name="minAnnualCompensation" value = {data.job.minAnnualCompensation} class="input input-bordered w-full" required />
             {#if 'minAnnualCompensation' in formErrors}
             <label class="label" for="title">
                 <span class="label-text-alt text-red-500">{formErrors['minAnnualCompensation'].message}</span>
@@ -83,7 +86,7 @@
           <label class="label" for="title">
               <span class="label-text">Max Compensation Range</span>
           </label>
-          <input type="number" name="maxAnnualCompensation" placeholder="10,000" class="input input-bordered w-full" required />
+          <input type="number" name="maxAnnualCompensation" value = {data.job.maxAnnualCompensation} class="input input-bordered w-full" required />
           {#if 'maxAnnualCompensation' in formErrors}
           <label class="label" for="title">
               <span class="label-text-alt text-red-500">{formErrors['maxAnnualCompensation'].message}</span>
@@ -97,7 +100,7 @@
               <label class="label" for="employer">
                   <span class="label-text">Company Name</span>
               </label>
-              <input type="text" name="employer" placeholder="e.g. Facebook" class="input input-bordered w-full" required />
+              <input type="text" name="employer" value = {data.job.employer} class="input input-bordered w-full" required />
               {#if 'employer' in formErrors}
               <label class="text" for="employer">
                   <span class="label-text-alt text-red-500">{formErrors['employer'].message}</span>
@@ -109,7 +112,7 @@
               <label class="label" for="location">
                   <span class="label-text">Job Location</span>
               </label>
-              <input type="text" name="location" placeholder="e.g. Singapore" class="input input-bordered w-full" required />
+              <input type="text" name="location" value = {data.job.location} class="input input-bordered w-full" required />
               {#if 'location' in formErrors}
               <label class="text" for="location">
                   <span class="label-text-alt text-red-500">{formErrors['email'].message}</span>
@@ -121,7 +124,7 @@
               <label class="text" for="description">
                   <span class="label-text">Description</span>
               </label>
-              <input type="text" name="description" class="input input-bordered w-full h-60 align-text-top" required />
+              <input type="text" name="description" value = {data.job.description} class="input input-bordered w-full h-60 align-text-top" required />
               {#if 'description' in formErrors}
               <label class="text" for="description">
                   <span class="label-text-alt text-red-500">{formErrors['Description'].message}</span>
@@ -133,7 +136,7 @@
               <label class="text" for="requirements">
                   <span class="label-text">Requirements</span>
               </label>
-              <input type="text" name="requirements"  class="input input-bordered w-full h-40 align-text-top" required />
+              <input type="text" name="requirements" value = {data.job.requirements}  class="input input-bordered w-full h-40 align-text-top" required />
               {#if 'requirements' in formErrors}
               <label class="text" for="requirements">
                   <span class="label-text-alt text-red-500">{formErrors['requirements'].message}</span>
@@ -145,7 +148,7 @@
               <label class="text" for="applicationInstructions">
                   <span class="label-text">Application Instructions</span>
               </label>
-              <input type="text" name="applicationInstructions" class="input input-bordered w-full h-20 align-text-top" required />
+              <input type="text" name="applicationInstructions" value = {data.job.applicationInstructions}  class="input input-bordered w-full h-20 align-text-top" required />
               {#if 'applicationInstructions' in formErrors}
               <label class="text" for=" applicationInstructions">
                   <span class="label-text-alt text-red-500">{formErrors['applicationInstructions'].message}</span>
@@ -154,7 +157,7 @@
             </div>
     
             <div class="form-control w-64 mt-4 float-right">
-              <button class="btn btn-neutral" >Post Job</button>
+              <button class="btn btn-neutral" >Update</button>
 
               
               

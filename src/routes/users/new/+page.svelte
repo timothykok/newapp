@@ -6,7 +6,7 @@
   
 
     export function postSignUp() {
-      goto('/jobs/new');
+      goto('/');
     }
   
     export async function createUser(evt) {
